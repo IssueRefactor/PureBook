@@ -1,0 +1,21 @@
+{
+  "name": "@example/basics",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@types/lodash": "^4.14.185",
+    "astro": "^1.2.7",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@octokit/plugin-rest-endpoint-methods": "^6.6.2"
+  }
+}

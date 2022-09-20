@@ -1,0 +1,25 @@
+---
+import { parseMenuDataFromIssues } from "@utils/parser/issues";
+import { listRepositoryIssuesFromOwnerAndRepo } from "@utils/request/github";
+
+
+const issues = await listRepositoryIssuesFromOwnerAndRepo('yuhang-dong', 'github-page')
+const menuData = parseMenuDataFromIssues(issues)
+
+---
+
+<div>
+    <ul>
+        {menuData.map(menu => {
+            return [(<li>{menu.name}</li>)].concat(menu.subMenus.map(subMenu => {
+                return (<li>{subMenu.name}</li>)
+            }))
+            
+        })}
+    </ul>
+
+</div>
+
+<style>
+
+</style>
