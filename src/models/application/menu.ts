@@ -4,5 +4,5 @@ export type SubMenu = {
 
 export type Menu = {
     name: string,
-    subMenus: SubMenu[]
+    subMenus?: SubMenu[]
 }
