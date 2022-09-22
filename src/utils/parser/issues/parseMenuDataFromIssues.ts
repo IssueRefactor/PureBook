@@ -14,10 +14,10 @@ export const parseMenuDataFromIssues = (issues: Issue[]): Menu[] => {
     const milestoneIdToMilestone = new Map<number, Milestone>();
     const milestoneToIssuesMap = new Map<Milestone, Issue[]>();
 
-    const none_milestone_issues: Issue[] = [];
+    const noneMilestoneIssues: Issue[] = [];
     issues.forEach(issue => {
         if(!issue.milestone) {
-            none_milestone_issues.push(issue);
+            noneMilestoneIssues.push(issue);
             return;
         }
 
@@ -36,6 +36,6 @@ export const parseMenuDataFromIssues = (issues: Issue[]): Menu[] => {
         return {
             name: milestone.title,
             subMenus: issues.sort((issue1, issue2) => issue1.id - issue2.id).map(issue => ({name: issue.title}))
-        }
-    })
+        } as Menu
+    }).concat(noneMilestoneIssues.sort((i1, i2) => i1.id - i2.id).map(issue => ({name: issue.title})))
 }
