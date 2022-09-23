@@ -2,7 +2,7 @@ import type { Menu } from "@models/application"
 import { useBoolean } from "ahooks"
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { isEmpty } from "lodash";
+import _ from "lodash";
 import ReactSvgWrapper from "@components/ReactSvgWrapper/ReactSvgWrapper";
 type PageProps = {
     name: Menu['name']
@@ -21,7 +21,7 @@ export type ChapterProps = Menu
 export default ({name, subMenus}: ChapterProps) => {
 
     const [isExpand, {toggle: toggleExpand}] = useBoolean(false);
-    return (!isEmpty(subMenus) ?( <div>
+    return (!_.isEmpty(subMenus) ?( <div>
         <div onClick={toggleExpand} className="flex justify-between">
             <span className="font-bold">{name}</span>
             {/* TODO: use css to control direction */}
