@@ -1,20 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
 
 import Config from '../configs/repo.json'
-import Menu from '@components/Menu/Menu.astro';
+import Aside from '@components/Aside/Aside.astro';
+import Navbar from '@components/Navbar/Navbar.astro';
 ---
 
 <Layout title={Config['index.title']}>
+    <Navbar />
 	<main>
-        <aside>
-            <Menu />
-        </aside>
+        <Aside />
 
         <article>
-            <nav>
-            </nav>
+
             <section>
             </section>
             

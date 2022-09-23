@@ -4,6 +4,7 @@ import { useState } from "react";
 import { parseMenuDataFromIssues } from "@utils/parser/issues";
 import { useAsyncEffect } from "ahooks";
 import { listRepositoryIssuesFromOwnerAndRepo } from "@utils/request/github";
+import Section from "./Chapter/Chapter";
 type MenuProps = InitProps<Issue[]>;
 
 export default ({ initData: initIssues }: MenuProps) => {
@@ -20,16 +21,10 @@ export default ({ initData: initIssues }: MenuProps) => {
   }, []);
 
   return (
-    <div>
-      <ul>
-        {menuData.map((menu) => {
-          return [<li>{menu.name}</li>].concat(
-            menu.subMenus?.map((subMenu) => {
-              return <li>{subMenu.name}</li>;
-            }) || []
-          );
-        })}
-      </ul>
+    <div className="cursor-pointer">
+      {
+        menuData.map(menu => (<Section {...menu} key={menu.name}/>))
+      }
     </div>
   );
 };

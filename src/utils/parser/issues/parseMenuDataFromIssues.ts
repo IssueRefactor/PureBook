@@ -15,7 +15,7 @@ export const parseMenuDataFromIssues = (issues: Issue[]): Menu[] => {
     const milestoneToIssuesMap = new Map<Milestone, Issue[]>();
 
     const noneMilestoneIssues: Issue[] = [];
-    issues.forEach(issue => {
+    issues?.forEach(issue => {
         if(!issue.milestone) {
             noneMilestoneIssues.push(issue);
             return;
