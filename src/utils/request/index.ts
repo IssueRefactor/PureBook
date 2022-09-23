@@ -1,5 +1,6 @@
 import { HttpMethod } from "../../constants/request"
 
+const isDev = import.meta.env.DEV
 
 type InitRequest = RequestInit & {
     origin?: boolean
