@@ -1,5 +1,5 @@
 import type { Menu } from "@models/application";
-import type { Issue, Milestone } from "@models/github";
+import type { ListIssues, Milestone } from "@models/github";
 import { isNull, isUndefined } from "lodash";
 
 /**
@@ -9,12 +9,12 @@ import { isNull, isUndefined } from "lodash";
  * @param issues 
  * @returns 
  */
-export const parseMenuDataFromIssues = (issues: Issue[]): Menu[] => {
+export const parseMenuDataFromIssues = (issues: ListIssues): Menu[] => {
 
     const milestoneIdToMilestone = new Map<number, Milestone>();
-    const milestoneToIssuesMap = new Map<Milestone, Issue[]>();
+    const milestoneToIssuesMap = new Map<Milestone, ListIssues>();
 
-    const noneMilestoneIssues: Issue[] = [];
+    const noneMilestoneIssues: ListIssues = [];
     issues?.forEach(issue => {
         if(!issue.milestone) {
             noneMilestoneIssues.push(issue);

@@ -1,11 +1,11 @@
 import type { InitProps, Menu } from "@models/application";
-import type { Issue } from "@models/github";
+import type { ListIssues } from "@models/github";
 import { useState } from "react";
 import { parseMenuDataFromIssues } from "@utils/parser/issues";
 import { useAsyncEffect } from "ahooks";
 import { listRepositoryIssuesFromOwnerAndRepo } from "@utils/request/github";
 import Section from "./Chapter/Chapter";
-type MenuProps = InitProps<Issue[]>;
+type MenuProps = InitProps<ListIssues>;
 
 export default ({ initData: initIssues }: MenuProps) => {
   const [menuData, setMenuData] = useState<Menu[]>(
