@@ -14,7 +14,7 @@ type SectionProps = {
     active?: boolean
 }
 const Section = ({name, active}: SectionProps) => {
- return <li className="font-light border-black border-l-2 leading-2 pl-3">{name}</li>;
+ return <li className="font-light border-black border-l-2 leading-2 pl-3"><a href="test">{name}</a></li>;
 }
 export type ChapterProps = Menu
 

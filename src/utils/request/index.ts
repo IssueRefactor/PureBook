@@ -6,9 +6,13 @@ type InitRequest = RequestInit & {
     origin?: boolean
 }
 
+const DEFAULT_OPTIONS = {
+    'Accept': 'application/vnd.github+json'
+}
+
 const request = <T>(resource: RequestInfo | URL, options?: InitRequest) => {
     return new Promise<T>((resolve, reject) => {
-        fetch(resource, options).then(res => {
+        fetch(resource, {...DEFAULT_OPTIONS,...options}).then(res => {
             resolve(options?.origin ? (res as unknown as T) : res.json());
         }).catch(reject);
     })

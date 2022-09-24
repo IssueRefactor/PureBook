@@ -1,5 +1,5 @@
 import type { Menu } from "@models/application";
-import type { ListIssues, Milestone } from "@models/github";
+import type { ListIssues, GetMilestone } from "@models/github";
 import { isNull, isUndefined } from "lodash";
 
 /**
@@ -11,8 +11,8 @@ import { isNull, isUndefined } from "lodash";
  */
 export const parseMenuDataFromIssues = (issues: ListIssues): Menu[] => {
 
-    const milestoneIdToMilestone = new Map<number, Milestone>();
-    const milestoneToIssuesMap = new Map<Milestone, ListIssues>();
+    const milestoneIdToMilestone = new Map<number, ListIssues[0]['milestone']>();
+    const milestoneToIssuesMap = new Map<ListIssues[0]['milestone'], ListIssues>();
 
     const noneMilestoneIssues: ListIssues = [];
     issues?.forEach(issue => {
@@ -32,9 +32,9 @@ export const parseMenuDataFromIssues = (issues: ListIssues): Menu[] => {
     })
 
     // TODO: 根据issues在milestone中的顺序进行排列
-   return Array.from(milestoneToIssuesMap).sort((kv1, kv2) => kv1[0].id - kv2[0].id).map(([milestone, issues]) => {
+   return Array.from(milestoneToIssuesMap).sort((kv1, kv2) => kv1[0]!.id - kv2[0]!.id).map(([milestone, issues]) => {
         return {
-            name: milestone.title,
+            name: milestone!.title,
             subMenus: issues.sort((issue1, issue2) => issue1.id - issue2.id).map(issue => ({name: issue.title}))
         } as Menu
     }).concat(noneMilestoneIssues.sort((i1, i2) => i1.id - i2.id).map(issue => ({name: issue.title})))
