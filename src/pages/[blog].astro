@@ -1,0 +1,17 @@
+---
+import DynamicMD from "@components/DynamicMD/DynamicMD";
+
+export const getStaticPaths = () => {
+    return [
+    { params: { blog: 'test' } }
+    ]
+}
+
+
+const {blog} = Astro.params
+import Layout from "@layouts/Layout.astro";
+---
+
+<Layout>
+<DynamicMD issueUrl="https://api.github.com/repos/yuhang-dong/github-page/issues/1" client:load commentsUrl="https://api.github.com/repos/yuhang-dong/github-page/issues/1/comments"/>
+</Layout>
