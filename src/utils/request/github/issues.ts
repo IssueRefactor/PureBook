@@ -14,3 +14,7 @@ export const listRepositoryIssueComments = baseGetRequest<ListComments>()
 export const listRepositoryIssuesFromOwnerAndRepo = (owner: string, repo: string) => {
     return listRepositoryIssuesFromRepoUrl(`https://api.github.com/repos/${owner}/${repo}/issues`)
 }
+
+export const getRepositoryIssueFromIssueId = (issueId: number | string) => {
+    return getRepositoryIssue(`https://api.github.com/repos/yuhang-dong/github-page/issues/${issueId}`)
+}

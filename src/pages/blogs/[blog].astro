@@ -1,0 +1,22 @@
+---
+import DynamicMD from "@components/DynamicMD/DynamicMD";
+import { listRepositoryIssuesFromOwnerAndRepo, getRepositoryIssueFromIssueId } from "@utils/request/github";
+import Layout from "@layouts/Layout.astro";
+export const getStaticPaths = async () => {
+    const issues = await listRepositoryIssuesFromOwnerAndRepo('yuhang-dong', 'github-page')
+    return issues.map(issue => ({
+        params: {
+            blog: issue.number
+        }
+    }));
+}
+
+
+const { blog } = Astro.params
+const issue = await getRepositoryIssueFromIssueId(blog!)
+console.log({issue: issue.body})
+---
+
+<Layout>
+    <DynamicMD originNote={issue.body} issueUrl="https://api.github.com/repos/yuhang-dong/github-page/issues/1" client:load commentsUrl="https://api.github.com/repos/yuhang-dong/github-page/issues/1/comments"/>
+</Layout>

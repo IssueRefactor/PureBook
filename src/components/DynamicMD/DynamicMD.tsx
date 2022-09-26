@@ -6,9 +6,10 @@ import { useState } from "react"
 type DynamicMDProps = {
     issueUrl: string,
     commentsUrl: string
+    originNote?: string | null
 }
 
-export default ({issueUrl, commentsUrl}: DynamicMDProps) => {
+export default ({issueUrl, commentsUrl, originNote}: DynamicMDProps) => {
 
     const [note, setNote] = useState<string>();
     const [comments, setComments] = useState<ListComments>();
@@ -20,7 +21,7 @@ export default ({issueUrl, commentsUrl}: DynamicMDProps) => {
     }, [])
     return (
         <div>
-            {note}
+            {note || originNote}
         </div>
     )
 }
