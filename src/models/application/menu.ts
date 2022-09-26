@@ -1,8 +1,13 @@
 export type SubMenu = {
     name: string,
+    id: number,
 }
 
 export type Menu = {
     name: string,
-    subMenus?: SubMenu[]
-}
+
+} & ({
+    subMenus: SubMenu[]
+} | {
+    id: number
+})
