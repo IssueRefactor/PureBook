@@ -18,7 +18,6 @@ const request = <T>(resource: RequestInfo | URL, options?: InitRequest) => {
         ...DEFAULT_HEADERS,
         ...options?.headers
     }
-    console.log(headers)
     return new Promise<T>((resolve, reject) => {
         fetch(resource, {...options, headers}).then(res => {
             resolve(options?.origin ? (res as unknown as T) : res.json());
