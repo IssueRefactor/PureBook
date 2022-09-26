@@ -6,13 +6,21 @@ type InitRequest = RequestInit & {
     origin?: boolean
 }
 
-const DEFAULT_OPTIONS = {
-    'Accept': 'application/vnd.github+json'
+const DEFAULT_HEADERS = {
+    'Accept': 'application/vnd.github+json',
+    // Don't worry. user_name and access_token will just used in node js environment, and will not leak to client
+    'Authorization': 'Basic ' + btoa(import.meta.env.PURE_BOOK_USER_NAME + ":" + import.meta.env.PURE_BOOK_ACCESS_TOKEN)
 }
 
 const request = <T>(resource: RequestInfo | URL, options?: InitRequest) => {
+
+    const headers = {
+        ...DEFAULT_HEADERS,
+        ...options?.headers
+    }
+    console.log(headers)
     return new Promise<T>((resolve, reject) => {
-        fetch(resource, {...DEFAULT_OPTIONS,...options}).then(res => {
+        fetch(resource, {...options, headers}).then(res => {
             resolve(options?.origin ? (res as unknown as T) : res.json());
         }).catch(reject);
     })
