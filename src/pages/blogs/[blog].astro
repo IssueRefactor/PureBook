@@ -6,7 +6,7 @@ export const getStaticPaths = async () => {
     const issues = await listRepositoryIssuesFromOwnerAndRepo('yuhang-dong', 'github-page')
     return issues?.map(issue => ({
         params: {
-            blog: issue.number
+            blog: String(issue.number)
         }
     }));
 }
@@ -16,6 +16,6 @@ const { blog } = Astro.params
 const issue = await getRepositoryIssueFromIssueId(blog!)
 ---
 
-<Layout>
+<Layout title={issue?.title}>
     <DynamicMD originNote={issue?.body} issueUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${issue?.number || 0}`} client:load commentsUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${issue?.number || 0}/comments`}/>
 </Layout>

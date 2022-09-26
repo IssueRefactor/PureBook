@@ -2,6 +2,12 @@
 import Config from '../configs/repo.json'
 import Aside from '@components/Aside/Aside.astro';
 import Navbar from '@components/Navbar/Navbar.astro';
+
+type Props = {
+	title?: string
+}
+
+const {title} = Astro.props
 ---
 
 <!DOCTYPE html>
@@ -11,20 +17,18 @@ import Navbar from '@components/Navbar/Navbar.astro';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{Config['index.title']}</title>
+		<title>{title || Config['index.title']}</title>
 		
 	</head>
-	<body>
-		<Navbar />
-	<main class="flex">
+	<body class="flex flex-col">
+	<Navbar />
+	<main class="flex h-full">
         <Aside />
-
-        <article>
-
+        <article class="flex flex-col">
+			<section>
             <slot />
-            
-            <footer>
-            </footer>
+		</section>
+            <footer class="h-14 border-black border-t-2 px-8 flex items-center justify-center">Copywrite</footer>
         </article>
 	</main>
 
@@ -34,9 +38,18 @@ import Navbar from '@components/Navbar/Navbar.astro';
 
 	body {
 		margin: 0;
+		height: 100vh;
 	}
 
+	article {
+		flex: 1 1;
+	}
 
+	section {
+		min-height: calc(100vh - 112);
+		padding: 16px 32px;
+		flex: 1 1;
+	}
 </style>
 
 <style is:global>
