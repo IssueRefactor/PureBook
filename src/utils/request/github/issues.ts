@@ -1,20 +1,46 @@
-import type { GetIssue, ListComments, ListIssues } from "../../../models/github";
+import type {
+  GetIssue,
+  ListComments,
+  ListIssues,
+  RateLimit,
+} from "../../../models/github";
 import request from "..";
+import { isRateLimit } from "@utils/application/isRateLimit";
 
-const baseGetRequest = <T>() => ((url: string) => request.get<T>(url))
+const baseGetRequest =
+  <T>() =>
+  (url: string) => {
+    const data = request.get<T | RateLimit>(url);
+    return data.then(value => {
+        if(isRateLimit(value)) {
+            // forever pending promise
+            return new Promise<undefined>(() => {});
+        }
 
-export const listRepositoryIssuesFromRepoUrl = baseGetRequest<ListIssues>()
+        return value;
+    })
 
-export const getRepositoryIssue = baseGetRequest<GetIssue>()
+    
+  };
 
-export const listRepositoryIssueComments = baseGetRequest<ListComments>()
+export const listRepositoryIssuesFromRepoUrl = baseGetRequest<ListIssues>();
 
+export const getRepositoryIssue = baseGetRequest<GetIssue>();
+
+export const listRepositoryIssueComments = baseGetRequest<ListComments>();
 
 // -----------------------------------------------------------------------------------//
-export const listRepositoryIssuesFromOwnerAndRepo = (owner: string, repo: string) => {
-    return listRepositoryIssuesFromRepoUrl(`https://api.github.com/repos/${owner}/${repo}/issues`)
-}
+export const listRepositoryIssuesFromOwnerAndRepo = (
+  owner: string,
+  repo: string
+) => {
+  return listRepositoryIssuesFromRepoUrl(
+    `https://api.github.com/repos/${owner}/${repo}/issues`
+  );
+};
 
 export const getRepositoryIssueFromIssueId = (issueId: number | string) => {
-    return getRepositoryIssue(`https://api.github.com/repos/yuhang-dong/github-page/issues/${issueId}`)
-}
+  return getRepositoryIssue(
+    `https://api.github.com/repos/yuhang-dong/github-page/issues/${issueId}`
+  );
+};

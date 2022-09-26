@@ -8,8 +8,8 @@ import Section from "./Chapter/Chapter";
 type MenuProps = InitProps<ListIssues>;
 
 export default ({ initData: initIssues }: MenuProps) => {
-  const [menuData, setMenuData] = useState<Menu[]>(
-    parseMenuDataFromIssues(initIssues)
+  const [menuData, setMenuData] = useState<Menu[] | undefined>(
+    initIssues ? parseMenuDataFromIssues(initIssues) : undefined
   );
 
   useAsyncEffect(async () => {
@@ -17,13 +17,13 @@ export default ({ initData: initIssues }: MenuProps) => {
       "yuhang-dong",
       "github-page"
     );
-    setMenuData(parseMenuDataFromIssues(issues));
+    issues && setMenuData(parseMenuDataFromIssues(issues));
   }, []);
 
   return (
     <div className="cursor-pointer">
       {
-        menuData.map(menu => (<Section {...menu} key={menu.name}/>))
+        menuData?.map(menu => (<Section {...menu} key={menu.name}/>))
       }
     </div>
   );
