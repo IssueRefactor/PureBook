@@ -8,10 +8,9 @@ import MainLayout from "@layouts/MainLayout.astro";
 const pathname = Astro.url.pathname
 const blog = pathname.substring(pathname.lastIndexOf('/') + 1)
 // TODO: 根据真正的url的不同 判断要返回动态路由还是真的404页面
-const issue = await getRepositoryIssueFromIssueId(blog!)
-const html = await renderMd(issue?.body || '');
+
 ---
 
 <MainLayout>
-    <DynamicMD originNote={html.metadata.html} issueUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${issue?.number || 0}`} client:load commentsUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${issue?.number || 0}/comments`}/>
+    <DynamicMD  issueUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${blog || 0}`} client:load commentsUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${blog || 0}/comments`}/>
 </MainLayout>
