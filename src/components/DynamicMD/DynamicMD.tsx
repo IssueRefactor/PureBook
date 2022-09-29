@@ -12,21 +12,22 @@ type DynamicMDProps = {
 
 export default ({issueUrl, commentsUrl, originNote}: DynamicMDProps) => {
 
-    const [note, setNote] = createSignal<string | null | undefined>(originNote);
-    const [comments, setComments] = createSignal<ListComments>();
+    const [html, setHtml] = createSignal<string | undefined | null>(originNote);
+    // const [comments, setComments] = createSignal<ListComments>();
 
     onMount(async() => {
         const [note, comments] = await Promise.all([getRepositoryIssue(issueUrl), listRepositoryIssueComments(commentsUrl)]);
-        setNote(note?.body || '')
-        setComments(comments)
+        const html = await renderMd(note?.body || '');
+        setHtml(html.metadata.html)
+        // setComments(comments)
     })
 
-    if(!note()) {
+    if(!html()) {
         return <img src={EmptyIcon} width="360" height="360"/>;
     }
 
     return (
-        <div textContent={renderMd(note()!)}>
-        </div>
+        // @ts-ignore innerHTML is solid.js attribute. refer: https://www.solidjs.com/docs/latest/api#innerhtmltextcontent
+        <div innerHTML={html()}></div>
     )
 }

@@ -1,0 +1,16 @@
+---
+import { listRepositoryIssuesFromOwnerAndRepo } from "@utils/request/github";
+import Menu from '@components/LeftSidebar/Menu'
+const issues = await listRepositoryIssuesFromOwnerAndRepo('yuhang-dong', 'github-page')
+---
+
+<Menu initData={issues} client:load/>
+
+<script is:inline>
+	window.addEventListener('DOMContentLoaded', () => {
+		var target = document.querySelector('[aria-current="page"]');
+		if (target && target.offsetTop > window.innerHeight - 100) {
+			document.querySelector('.nav-groups').scrollTop = target.offsetTop;
+		}
+	});
+</script>

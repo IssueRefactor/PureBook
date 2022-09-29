@@ -3,10 +3,12 @@ import type { ListIssues } from "@models/github";
 import { parseMenuDataFromIssues } from "@utils/parser/issues";
 import { listRepositoryIssuesFromOwnerAndRepo } from "@utils/request/github";
 import { createSignal, JSX, onMount } from "solid-js";
-import Section from "./Chapter/Chapter";
+import Chapter from "./Chapter/Chapter";
+
+import './menu.css'
 type MenuProps = InitProps<ListIssues>;
 
-export default ({ initData: initIssues }: MenuProps): JSX.Element => {
+export default ({ initData: initIssues }: MenuProps) => {
   const [menuData, setMenuData] = createSignal<Menu[] | undefined>(
     initIssues ? parseMenuDataFromIssues(initIssues) : undefined
   );
@@ -19,11 +21,15 @@ export default ({ initData: initIssues }: MenuProps): JSX.Element => {
     issues && setMenuData(parseMenuDataFromIssues(issues));
   });
 
-  return (<>
-    <div class="cursor-pointer">
-      {
-        menuData()?.map(menu => (<Section {...menu}/>))
-      }
-    </div></>
+  return (
+    <nav aria-labelledby="grid-left">
+	<ul class="nav-groups">
+		{menuData()?.map((menu) => (
+			<li>
+				<Chapter {...menu}/>
+			</li>
+		))}
+	</ul>
+</nav>
   );
 };
