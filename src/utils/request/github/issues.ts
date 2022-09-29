@@ -3,7 +3,7 @@ import type {
   ListComments,
   ListIssues,
   RateLimit,
-} from "../../../models/github";
+} from "@models/github";
 import request from "..";
 import { isRateLimit } from "@utils/application/isRateLimit";
 

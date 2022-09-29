@@ -1,8 +1,0 @@
----
-import { listRepositoryIssuesFromOwnerAndRepo } from "@utils/request/github";
-import Menu from './Menu'
-const issues = await listRepositoryIssuesFromOwnerAndRepo('yuhang-dong', 'github-page')
----
-<aside class="pl-6 pr-4 w-80 border-black border-r-2 pt-1">
-        <Menu initData={issues} client:load/>
-</aside>
