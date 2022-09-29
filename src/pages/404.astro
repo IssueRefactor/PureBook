@@ -1,12 +1,10 @@
 ---
 import DynamicMD from "@components/DynamicMD/DynamicMD";
-import { getRepositoryIssueFromIssueId } from "@utils/request/github";
-import { renderMd } from "@utils/parser/render/mdRender";
 import MainLayout from "@layouts/MainLayout.astro";
 
 
 const pathname = Astro.url.pathname
-const blog = pathname.substring(pathname.lastIndexOf('/') + 1)
+const blog = pathname.substring(pathname.lastIndexOf('/'))
 // TODO: 根据真正的url的不同 判断要返回动态路由还是真的404页面
 
 ---
