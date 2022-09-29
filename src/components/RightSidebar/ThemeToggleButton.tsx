@@ -1,4 +1,4 @@
-import { createEffect, createSignal } from 'solid-js';
+import { createEffect, createSignal, onCleanup, onMount } from 'solid-js';
 import './ThemeToggleButton.css';
 
 const themes = ['light', 'dark'];
@@ -29,6 +29,7 @@ const icons = [
 ];
 
 const ThemeToggle = () => {
+	
 	const [theme, setTheme] = createSignal((() => {
 		if (import.meta.env.SSR) {
 			return undefined;
@@ -41,6 +42,22 @@ const ThemeToggle = () => {
 		}
 		return 'light';
 	})());
+
+	const handleThemeChange = (that: MediaQueryList) => {
+		setTheme(that.matches ? 'dark' : 'light')
+	}
+
+	onMount(() => {
+		const mediaQueryListDark = window.matchMedia('(prefers-color-scheme: dark)');
+			// @ts-ignore
+		mediaQueryListDark.addEventListener('change', handleThemeChange);
+	})
+
+	onCleanup(() => {
+		const mediaQueryListDark = window.matchMedia('(prefers-color-scheme: dark)');
+			// @ts-ignore
+		mediaQueryListDark.removeEventListener('change', handleThemeChange)
+	})
 
 	createEffect(() => {
 		const root = document.documentElement;
