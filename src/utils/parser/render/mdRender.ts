@@ -5,7 +5,6 @@ export const renderMd = (content: string) => {
   return renderMarkdown(
     content,
     {
-        
     }
   );
 };
