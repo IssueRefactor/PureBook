@@ -1,24 +1,39 @@
 ---
 import DynamicMD from "@components/DynamicMD/DynamicMD";
-import { listRepositoryIssuesFromOwnerAndRepo, getRepositoryIssueFromIssueId } from "@utils/request/github";
+import {
+  listRepositoryIssuesFromOwnerAndRepo,
+  getRepositoryIssueFromIssueId,
+} from "@utils/request/github";
 import { renderMd } from "@utils/parser/render/mdRender";
-import MainLayout from "@layouts/MainLayout.astro";
+import DynamicLayout from "@layouts/DynamicLayout.astro";
 
 export const getStaticPaths = async () => {
-    const issues = await listRepositoryIssuesFromOwnerAndRepo('yuhang-dong', 'github-page')
-    return issues?.map(issue => ({
-        params: {
-            blog: String(issue.number)
-        }
-    }));
-}
+  const issues = await listRepositoryIssuesFromOwnerAndRepo(
+    "yuhang-dong",
+    "github-page"
+  );
+  return issues?.map((issue) => ({
+    params: {
+      blog: String(issue.number),
+    },
+  }));
+};
 
-
-const { blog } = Astro.params
-const issue = await getRepositoryIssueFromIssueId(blog!)
-const html = await renderMd(issue?.body || '');
+const { blog } = Astro.params;
+const issue = await getRepositoryIssueFromIssueId(blog!);
+const html = await renderMd(issue?.body || "");
 ---
 
-<MainLayout>
-    <DynamicMD originNote={html.metadata.html} issueUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${issue?.number || 0}`} client:load commentsUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${issue?.number || 0}/comments`}/>
-</MainLayout>
+<DynamicLayout>
+  <DynamicMD
+    title={issue?.title || ""}
+    originNote={html.metadata.html}
+    issueUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${
+      issue?.number || 0
+    }`}
+    client:load
+    commentsUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${
+      issue?.number || 0
+    }/comments`}
+  />
+</DynamicLayout>
