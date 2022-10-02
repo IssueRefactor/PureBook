@@ -123,3 +123,11 @@ body {
 	color: var(--theme-selection-color);
 	background-color: var(--theme-selection-bg);
 }
+
+
+.edit-on-github {
+	text-decoration: none;
+	font: inherit;
+	color: inherit;
+	font-size: 1rem;
+}

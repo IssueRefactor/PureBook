@@ -6,9 +6,7 @@ type ItemOffsets = {
 	topOffset: number;
 };
 
-const TableOfContents= ({
-	headings = [],
-}: { headings: MarkdownHeading[] }) => {
+const TableOfContents= (props: { headings?: MarkdownHeading[] }) => {
 	let itemOffsets =[]
 	// FIXME: Not sure what this state is doing. It was never set to anything truthy.
 	const [activeId] = createSignal<string>('');
@@ -36,7 +34,7 @@ const TableOfContents= ({
 				<li class={`heading-link depth-2 ${activeId() === 'overview' ? 'active' : ''}`.trim()}>
 					<a href="#overview">Overview</a>
 				</li>
-				{headings
+				{(props.headings || [])
 					.filter(({ depth }) => depth > 1 && depth < 4)
 					.map((heading) => (
 						<li

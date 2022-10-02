@@ -20,16 +20,14 @@ const base = import.meta.env.BASE_URL;
 
 <header>
 	<SkipToContent />
-	<nav class="nav-wrapper" title="Top Navigation">
+	<nav class="flex px-12 content-end items-center" title="Top Navigation">
 		<div class="menu-toggle">
 			<SidebarToggle client:idle />
 		</div>
-		<div class="logo flex">
-			<a href={base}>
+		<a class="flex overflow-hidden hover:no-underline text-slate-700 dark:text-slate-100" href={base}>
 				<AstroLogo size={40} />
 				<h1>{CONFIG.SITE.title ?? 'Documentation'}</h1>
-			</a>
-		</div>
+		</a>
 		<div style="flex-grow: 1;"></div>
 		{KNOWN_LANGUAGE_CODES.length > 1 && <LanguageSelect lang={lang} client:idle />}
 		<div class="search-item">
