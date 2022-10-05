@@ -4,6 +4,9 @@ patchedDependencies:
   '@astrojs/markdown-remark@1.1.3':
     hash: yoflkn2462cq2cavwfi3i77h6u
     path: patches/@astrojs__markdown-remark@1.1.3.patch
+  shiki@0.11.1:
+    hash: 6lrba34put2qrmjcro23b7eu2a
+    path: patches/shiki@0.11.1.patch
 
 specifiers:
   '@algolia/client-search': ^4.13.1
@@ -220,7 +223,7 @@ packages:
       remark-parse: 10.0.1
       remark-rehype: 10.1.0
       remark-smartypants: 2.0.0
-      shiki: 0.11.1
+      shiki: 0.11.1_6lrba34put2qrmjcro23b7eu2a
       unified: 10.1.2
       unist-util-map: 3.1.1
       unist-util-visit: 4.1.1
@@ -1071,7 +1074,7 @@ packages:
       resolve: 1.22.1
       rollup: 2.78.1
       semver: 7.3.7
-      shiki: 0.11.1
+      shiki: 0.11.1_6lrba34put2qrmjcro23b7eu2a
       sirv: 2.0.2
       slash: 4.0.0
       string-width: 5.1.2
@@ -3762,13 +3765,14 @@ packages:
     engines: {node: '>=8'}
     dev: false
 
-  /shiki/0.11.1:
+  /shiki/0.11.1_6lrba34put2qrmjcro23b7eu2a:
     resolution: {integrity: sha512-EugY9VASFuDqOexOgXR18ZV+TbFrQHeCpEYaXamO+SZlsnT/2LxuLBX25GGtIrwaEVFXUAbUQ601SWE2rMwWHA==}
     dependencies:
       jsonc-parser: 3.2.0
       vscode-oniguruma: 1.6.2
       vscode-textmate: 6.0.0
     dev: false
+    patched: true
 
   /signal-exit/3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
