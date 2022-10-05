@@ -9,7 +9,7 @@ type DynamicMDProps = {
     issueUrl: string,
     commentsUrl: string
     originNote?: string | null,
-    title: string,
+    title?: string,
 }
 
 export default ({issueUrl, commentsUrl, originNote, title}: DynamicMDProps) => {
