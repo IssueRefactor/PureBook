@@ -1,6 +1,7 @@
 import { renderMarkdown } from "@astrojs/markdown-remark";
+import { navigate } from "@utils/application/navigate";
 import * as shiki from 'shiki';
-shiki.setCDN('https://cdn.jsdelivr.net/npm/shiki@0.11.1/')
+shiki.setCDN(navigate.to('/assets/shiki/'))
 export const renderMd = (content: string) => {
   return renderMarkdown(
     content,
