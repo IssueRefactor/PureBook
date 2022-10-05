@@ -10,14 +10,15 @@ type DynamicMDProps = {
     commentsUrl: string
     originNote?: string | null,
     title?: string,
+    originHeading?: MarkdownHeading[]
 }
 
-export default ({issueUrl, commentsUrl, originNote, title}: DynamicMDProps) => {
+export default ({issueUrl, commentsUrl, originNote, title, originHeading}: DynamicMDProps) => {
 
     const [html, setHtml] = createSignal<string | undefined | null>(originNote);
     // const [comments, setComments] = createSignal<ListComments>();
 
-    const [headings, setHeadings] = createSignal<MarkdownHeading[]>();
+    const [headings, setHeadings] = createSignal<MarkdownHeading[] | undefined>(originHeading);
     onMount(async() => {
         const [note, comments] = await Promise.all([getRepositoryIssue(issueUrl), listRepositoryIssueComments(commentsUrl)]);
         const html = await renderMd(note?.body || '');

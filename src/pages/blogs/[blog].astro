@@ -28,6 +28,7 @@ const html = await renderMd(issue?.body || "");
   <DynamicMD
     title={issue?.title || ""}
     originNote={html.metadata.html}
+    originHeading={html.metadata.headings}
     issueUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${
       issue?.number || 0
     }`}
