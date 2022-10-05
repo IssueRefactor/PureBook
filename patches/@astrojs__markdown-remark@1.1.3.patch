@@ -1,8 +1,13 @@
 diff --git a/dist/index.js b/dist/index.js
-index f9b5cf70f817015cf60d752543c22fcf067db05c..545f3dd5a84aad321212ed05528af7ffe22f5f36 100644
+index f9b5cf70f817015cf60d752543c22fcf067db05c..1f3ee92a187779c37005a9ebbd128d16abedbbdb 100644
 --- a/dist/index.js
 +++ b/dist/index.js
-@@ -19,7 +19,11 @@ import markdownToHtml from "remark-rehype";
+@@ -1,4 +1,3 @@
+-import { loadPlugins } from "./load-plugins.js";
+ import createCollectHeadings from "./rehype-collect-headings.js";
+ import rehypeEscape from "./rehype-escape.js";
+ import rehypeExpressions from "./rehype-expressions.js";
+@@ -19,7 +18,11 @@ import markdownToHtml from "remark-rehype";
  import { unified } from "unified";
  import { VFile } from "vfile";
  export * from "./types.js";
@@ -15,49 +20,14 @@ index f9b5cf70f817015cf60d752543c22fcf067db05c..545f3dd5a84aad321212ed05528af7ff
  const DEFAULT_REHYPE_PLUGINS = [];
  async function renderMarkdown(content, opts) {
    var _a;
-@@ -41,7 +45,7 @@ async function renderMarkdown(content, opts) {
+@@ -41,8 +44,8 @@ async function renderMarkdown(content, opts) {
      remarkPlugins = [...DEFAULT_REMARK_PLUGINS, ...remarkPlugins];
      rehypePlugins = [...DEFAULT_REHYPE_PLUGINS, ...rehypePlugins];
    }
 -  const loadedRemarkPlugins = await Promise.all(loadPlugins(remarkPlugins));
+-  const loadedRehypePlugins = await Promise.all(loadPlugins(rehypePlugins));
 +  const loadedRemarkPlugins = DEFAULT_REMARK_PLUGINS;
-   const loadedRehypePlugins = await Promise.all(loadPlugins(rehypePlugins));
++  const loadedRehypePlugins = DEFAULT_REHYPE_PLUGINS
    loadedRemarkPlugins.forEach(([plugin, pluginOpts]) => {
      parser.use([[plugin, pluginOpts]]);
-diff --git a/package.json b/package.json
-index e45c241fe62a63d4b98d7210c53bd9906c40eaf2..8ab00509f09e2d1ef16561f22b0c257ef74618a1 100644
---- a/package.json
-+++ b/package.json
-@@ -2,6 +2,7 @@
-   "name": "@astrojs/markdown-remark",
-   "version": "1.1.3",
-   "type": "module",
-+  "types": "./dist/index.d.ts",
-   "author": "withastro",
-   "license": "MIT",
-   "repository": {
-diff --git a/src/index.ts b/src/index.ts
-index c64bdac0e0be5f2befaee16c97c7b18aa7844d77..4dc5f6cf802da8ee728dbd62b7f39876ddc6f527 100644
---- a/src/index.ts
-+++ b/src/index.ts
-@@ -24,7 +24,10 @@ import { VFile } from 'vfile';
- 
- export * from './types.js';
- 
--export const DEFAULT_REMARK_PLUGINS = ['remark-gfm', 'remark-smartypants'];
-+import remarkGfm from 'remark-gfm';
-+import smartypants from 'remark-smartypants';
-+
-+export const DEFAULT_REMARK_PLUGINS = [[remarkGfm], [smartypants]];
- export const DEFAULT_REHYPE_PLUGINS = [];
- 
- /** Shared utility for rendering markdown */
-@@ -56,7 +59,7 @@ export async function renderMarkdown(
- 		rehypePlugins = [...DEFAULT_REHYPE_PLUGINS, ...rehypePlugins];
- 	}
- 
--	const loadedRemarkPlugins = await Promise.all(loadPlugins(remarkPlugins));
-+	const loadedRemarkPlugins = DEFAULT_REMARK_PLUGINS;
- 	const loadedRehypePlugins = await Promise.all(loadPlugins(rehypePlugins));
- 
- 	loadedRemarkPlugins.forEach(([plugin, pluginOpts]) => {
+   });
