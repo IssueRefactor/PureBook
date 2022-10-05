@@ -1,0 +1,28 @@
+diff --git a/dist/index.js b/dist/index.js
+index 5b734129a5fcf224cffd59c2081358ef770271a4..cd8aa9c912f837a2da2f781f4d8ea9d9cff29005 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1669,7 +1669,7 @@ async function getOniguruma() {
+     if (isBrowser) {
+       if (typeof WASM === "string") {
+         loader = vscodeOniguruma.loadWASM({
+-          data: await fetch(_resolvePath("dist/onig.wasm")).then((r) => r.arrayBuffer())
++          data: await fetch(_resolvePath("onig.wasm")).then((r) => r.arrayBuffer())
+         });
+       } else {
+         loader = vscodeOniguruma.loadWASM(WASM);
+diff --git a/package.json b/package.json
+index d86f5cb0c1295be1582e2fc12080600475059a35..e208d54a21685901841d03584b31a627253610eb 100644
+--- a/package.json
++++ b/package.json
+@@ -6,10 +6,7 @@
+   "homepage": "https://github.com/octref/shiki/tree/main/packages/shiki",
+   "license": "MIT",
+   "main": "dist/index.js",
+-  "module": "dist/index.esm.js",
+   "types": "dist/index.d.ts",
+-  "unpkg": "dist/index.unpkg.iife.js",
+-  "jsdelivr": "dist/index.jsdelivr.iife.js",
+   "keywords": [
+     "shiki",
+     "syntax-highlighter",
