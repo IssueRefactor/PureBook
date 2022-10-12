@@ -1,8 +1,7 @@
 
 import TableOfContents from './TableOfContents';
 import MoreMenu from './MoreMenu';
-import type { MarkdownHeading } from 'astro';
-import { createEffect } from 'solid-js';
+import type { MarkdownHeading } from '@models/application';
 
 type Props = {
 	headings?: MarkdownHeading[];

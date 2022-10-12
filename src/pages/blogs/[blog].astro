@@ -6,6 +6,7 @@ import {
 } from "@utils/request/github";
 import { renderMd } from "@utils/parser/render/mdRender";
 import DynamicLayout from "@layouts/DynamicLayout.astro";
+import { renderHeadings, renderMarkdown } from "@utils/parser/render";
 
 export const getStaticPaths = async () => {
   const issues = await listRepositoryIssuesFromOwnerAndRepo(
@@ -21,20 +22,21 @@ export const getStaticPaths = async () => {
 
 const { blog } = Astro.params;
 const issue = await getRepositoryIssueFromIssueId(blog!);
-const html = await renderMd(issue?.body || "");
+const html = renderMarkdown(issue?.body || '')
+const headings = renderHeadings(html)
 ---
 
 <DynamicLayout>
   <DynamicMD
     title={issue?.title || ""}
-    originNote={html.metadata.html}
-    originHeading={html.metadata.headings}
+    originNote={html}
+    originHeading={headings}
     issueUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${
       issue?.number || 0
     }`}
     client:load
     commentsUrl={`https://api.github.com/repos/yuhang-dong/github-page/issues/${
-      issue?.number || 0
+      issue?.number || blog || 0
     }/comments`}
   />
 </DynamicLayout>

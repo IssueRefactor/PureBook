@@ -1,7 +1,6 @@
-import type { Frontmatter } from '../../config';
 import MoreMenu from '../RightSidebar/MoreMenu';
 import TableOfContents from '../RightSidebar/TableOfContents';
-import type { MarkdownHeading } from 'astro';
+import type { MarkdownHeading } from '@models/application';
 import type { JSXElement } from 'solid-js';
 
 type Props = {

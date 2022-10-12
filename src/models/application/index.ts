@@ -1,5 +1,5 @@
 export * from './menu'
-
+export * from './heading'
 
 export type InitProps<T> = {
     initData?: T
