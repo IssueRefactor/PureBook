@@ -1,6 +1,6 @@
 import type {
+  Comments,
   GetIssue,
-  ListComments,
   ListIssues,
   RateLimit,
 } from "@models/github";
@@ -27,7 +27,7 @@ export const listRepositoryIssuesFromRepoUrl = baseGetRequest<ListIssues>();
 
 export const getRepositoryIssue = baseGetRequest<GetIssue>();
 
-export const listRepositoryIssueComments = baseGetRequest<ListComments>();
+export const listRepositoryIssueComments = baseGetRequest<Comments>();
 
 // -----------------------------------------------------------------------------------//
 export const listRepositoryIssuesFromOwnerAndRepo = (
