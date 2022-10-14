@@ -47,18 +47,18 @@ export default ({
   }
   return (
     <>
-      <div id="grid-main" class="grow flex items-center">
+      <div id="grid-main" class="grow flex items-center p-4">
         <PageContent title={title} headings={headings()} githubEditUrl={""}>
           {/* @ts-ignore innerHTML is solid.js attribute. refer: https://www.solidjs.com/docs/latest/api#innerhtmltextcontent */}
           <div class="markdown-body" innerHTML={html()}></div>
-          <div>
+          <div class="mt-16">
             <GitComments comments={comments()} />
           </div>
         </PageContent>
       </div>
       <aside
         id="grid-right"
-        class="grid-sidebar w-72 sticky top-0"
+        class="grid-sidebar w-72 sticky top-0 hidden lg:block"
         title="Table of Contents"
       >
         <RightSidebar headings={headings()} githubEditUrl={""} />

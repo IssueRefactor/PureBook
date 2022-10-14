@@ -21,9 +21,11 @@ export default ({ initData: initIssues }: MenuProps) => {
     issues && setMenuData(parseMenuDataFromIssues(issues));
   });
 
-  return (
+  return (<aside
+    
+  >
     <nav aria-labelledby="grid-left" class="sticky top-0">
-      <ul class="h-full overflow-y-auto pb-24  pt-8">
+      <ul class="overflow-y-auto pb-24 sticky top-0">
         {menuData()?.map((menu) => (
           <li>
             <Chapter {...menu} />
@@ -31,5 +33,6 @@ export default ({ initData: initIssues }: MenuProps) => {
         ))}
       </ul>
     </nav>
+    </aside>
   );
 };

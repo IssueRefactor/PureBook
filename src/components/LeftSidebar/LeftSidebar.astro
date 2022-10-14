@@ -4,8 +4,9 @@ import Menu from '@components/LeftSidebar/Menu'
 const issues = await listRepositoryIssuesFromOwnerAndRepo('yuhang-dong', 'github-page')
 ---
 
+<div class="hidden md:block">
 <Menu initData={issues} client:load/>
-
+</div>
 <script is:inline>
 	window.addEventListener('DOMContentLoaded', () => {
 		var target = document.querySelector('[aria-current="page"]');
