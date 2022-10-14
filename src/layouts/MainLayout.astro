@@ -106,26 +106,14 @@ const currentFile = `src/pages${currentPage.replace(/\/$/, "")}.md`;
         width: 100%;
         height: 100%;
       }
-
-      .mobile-sidebar-toggle {
-        overflow: hidden;
-      }
-
-      .mobile-sidebar-toggle #grid-left {
-        display: block;
-        top: 2rem;
-      }
     </style>
   </head>
 
   <body>
     <Header currentPage={currentPage} />
     <main class="flex mx-12">
-      <aside
-        class="h-screen w-80 flex sticky top-0"
-      >
+      
         <LeftSidebar />
-      </aside>
       <div class="flex grow items-start">
         <slot />
       </div>

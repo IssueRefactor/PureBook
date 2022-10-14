@@ -1,18 +1,12 @@
+import Menu from "@components/LeftSidebar/Menu";
+import clsx from "clsx";
 import { createEffect, createSignal } from "solid-js";
-
+import {Portal} from "solid-js/web"
+import './SidebarToggle.css'
 const MenuToggle = () => {
 	const [sidebarShown, setSidebarShown] = createSignal(false);
-
-	createEffect(() => {
-		const body = document.querySelector('body')!;
-		if (sidebarShown()) {
-			body.classList.add('mobile-sidebar-toggle');
-		} else {
-			body.classList.remove('mobile-sidebar-toggle');
-		}
-	});
-
 	return (
+		<>
 		<button
 			type="button"
 			aria-pressed={sidebarShown() ? 'true' : 'false'}
@@ -36,6 +30,12 @@ const MenuToggle = () => {
 			</svg>
 			<span class="sr-only">Toggle sidebar</span>
 		</button>
+		<Portal>
+			<div class={clsx("border-slate-200 border-r h-full sidebarToggle md:hidden", sidebarShown() ? 'showSidebar' : 'hidden')}>
+				<Menu />
+			</div>
+		</Portal>
+		</>
 	);
 };
 
